@@ -5,9 +5,24 @@
 
 using namespace std;
 
+int modexp(int a, int b, int c);
+
+void get_input(int *a, int *b, int *c);
+
 int main() {
-	string args;
+	int a, b, n;
+	get_input(&a, &b, &n);
+	int answer = modexp(a, b, n);
+
+	cout << a << "^" << b << " mod "<< n << " = ";
+	cout << answer << endl; 
+
+	return 0;
+}
+
+void get_input(int *a, int *b, int *n) {
 	int arr[3];
+	string args;
 
 	cout << "Enter the values of a b and n to compute a^b mod n: ";
 	getline(cin, args);
@@ -22,13 +37,15 @@ int main() {
 		i ++;
 	}
 
+	*a = arr[0];
+	*b = arr[1];
+	*n = arr[2];
+
+}
+
+int modexp(int a, int b, int n) {
 	int pow = 1;
-	for (int i = 0; i < arr[1]; i++)
-		pow *= arr[0];
-
-	cout << arr[0] << "^" << arr[1] << " mod "<< arr[2] << " = ";
-	cout << pow % arr[2] << endl; 
-
-
-	return 0;
+	for (int i = 0; i < b; i++)
+		pow *= a;
+	return pow % n;
 }
