@@ -1,5 +1,5 @@
-// gpruesse@wolf:~/Lab6$./encode filename 191 11314200 
-// Creating file named filename.encoded... 
+// gpruesse@wolf:~/Lab8$./decode filename -3085456 11314200 
+// Creating file named filename.decoded... 
 
 #include <iostream>
 #include <fstream>
@@ -16,13 +16,13 @@ int main(int argv, char *argc[]) {
 	char *file_name = argc[1];
 	long long e = atol(argc[2]);
 	long long n = atol(argc[3]);
-	const char *encoded_extention = ".encoded";
+	const char *encoded_extention = ".decoded";
 
 	char * encoded_file = (char *) malloc(1 + strlen(file_name)+ strlen(encoded_extention) );
 	strcpy(encoded_file, file_name);
 	strcat(encoded_file, encoded_extention);
 
-	printf("Creating file named %s.encoded...", file_name);
+	printf("Creating file named %s.decoded...", file_name);
 
 	char y = 'y';
 	int yi = y;
@@ -43,15 +43,16 @@ int main(int argv, char *argc[]) {
 	}
 	char c;
 	long long ci;
+	string word;
+	long long code;
 
-	while (f.get(c)) {
-		cout << c << " " << e << " " << n << " ";
-		ci = c;
-		cout << ci << " ";
-		cout << modexp(ci, e, n) << endl;
+	while (f >> word) {
+		cout << word << " " << e << " " << n << " ";
+		code = stoll(word);
+		cout << code << " ";
+		cout << modexp(code, e, n) << endl;
 
-		of << modexp(ci, e, n);
-		of << " ";
+		of << (char)modexp(code, e, n);
 	}
 	
 	return 0;
