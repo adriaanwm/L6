@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <ctime>
 
 struct tuple {
 	int x, y, gcd;
@@ -8,21 +9,30 @@ struct tuple {
 using namespace std;
 
 tuple euclid_extended(int x, int y);
+tuple gcd(int x, int y);
 
 int main(int argv, char *argc[]) {
 	int x;
 	int y;
+	clock_t start;
 
 	if (argv != 3) return 0;
 
 	x = atoi(argc[1]);
 	y = atoi(argc[2]);
 
-	tuple t = euclid_extended(x, y);
+	/* start = clock(); */
+	/* tuple t = euclid_extended(x, y); */
+	/* cout << "Time: " << (clock() - start) / (double(CLOCKS_PER_SEC/1000)) << endl; */
+	/* cout << "gcd(" << x << "," << y << ")=" << t.gcd; */
+	/* cout << ", x= " << t.x << ", y= " << t.y << endl; */
 
+	/* start = clock(); */
+	/* cout << "Time: " << (clock() - start) / (double(CLOCKS_PER_SEC/1000)) << endl; */
+	tuple t = gcd(x, y);
 	cout << "gcd(" << x << "," << y << ")=" << t.gcd;
 	cout << ", x= " << t.x << ", y= " << t.y << endl;
-  
+
 	return 0;
 }
 
@@ -52,3 +62,30 @@ tuple euclid_extended(int x, int y) {
 }
 
 
+tuple gcd(int a, int b) {
+	tuple results;
+	int r = b;
+	int prev_r = a;
+	int s = 0;
+	int prev_s = 1;
+	int t = 1;
+	int prev_t = 0;
+	int temp;
+	int quotient;
+	while (r != 0) {
+		quotient = prev_r / r;
+		temp = prev_r;
+		prev_r = r;
+		r = temp - (quotient * r);
+		temp = prev_s;
+		prev_s = s;
+		s = temp - (quotient * s);
+		temp = prev_t;
+		prev_t = t;
+		t = temp - (quotient * t);
+	}
+	results.x = prev_s;
+	results.y = prev_t;
+	results.gcd = prev_r;
+	return results;
+}
