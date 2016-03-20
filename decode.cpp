@@ -27,9 +27,6 @@ int main(int argv, char *argc[]) {
 	char y = 'y';
 	int yi = y;
 
-	cout << yi << endl;
-
-
 	// read file
 	ifstream f;
 	ofstream of;
@@ -47,11 +44,7 @@ int main(int argv, char *argc[]) {
 	long long code;
 
 	while (f >> word) {
-		cout << word << " " << e << " " << n << " ";
 		code = stoll(word);
-		cout << code << " ";
-		cout << modexp(code, e, n) << endl;
-
 		of << (char)modexp(code, e, n);
 	}
 	

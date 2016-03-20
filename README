@@ -1,1 +1,8 @@
 GIT repository for csci485/Lab6
+
+
+p = 3389;
+q = 2917;
+n = 3389 * 2917 = 9885713
+private key = 9417823
+public key = 1327

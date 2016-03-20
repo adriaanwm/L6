@@ -8,8 +8,8 @@ using namespace std;
 int modInverse(long n, long p);
 
 int main(int argv, char *argc[]) {
-	long p1 = 20477;
-	long p2 = 32353;
+	long p1 = 2917;
+	long p2 = 3389;
 	long n = p1 * p2;
 	long e = 1327;
 	long d = modInverse(e, (p1 - 1) * (p2 - 1));
